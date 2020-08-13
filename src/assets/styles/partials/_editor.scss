@@ -1,0 +1,23 @@
+#editor {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+
+  #input,
+  #output {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+#output {
+  border-right: $border;
+}
+
+textarea#input {
+  border: 0;
+  font-family: $font;
+  resize: none;
+}

@@ -1,0 +1,33 @@
+html {
+  box-sizing: border-box;
+  font-family: font;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  direction: rtl;
+  font-family: $font;
+  overflow: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  > header {
+    border-bottom: $border;
+    background: #fafafa;
+    padding: 20px;
+  }
+
+  > footer {
+    border-top: $border;
+    background: #fafafa;
+    padding: 20px;
+  }
+}
