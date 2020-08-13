@@ -1,7 +1,7 @@
 import React from "react";
 import Markdown from "react-markdown";
 
-const Editor = ({ text, setText, count, setCount }) => {
+const Editor = ({ text, setText }) => {
   return (
     <div id="editor">
       <textarea
