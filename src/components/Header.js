@@ -1,26 +1,27 @@
 import React from "react";
+import { downloadMd } from "../helpers";
+import Logo from "../assets/images/logo.svg";
 
-const Header = ({ text }) => {
-  const download = () => {
-    const blob = new Blob([text], { type: "text/plain" });
-
-    const a = document.createElement("a");
-    a.download = "file.md";
-    a.href = URL.createObjectURL(blob);
-    a.dataset.downloadurl = ["text/plain", a.download, a.href].join(":");
-    a.style.display = "none";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function () {
-      URL.revokeObjectURL(a.href);
-    }, 1500);
-  };
-
+const Header = ({ text, setText }) => {
   return (
     <header>
-      Header
-      <button onClick={download}>Download as md</button>
+      <div className="right">
+        <img src={Logo} alt="Neveshte" width="32" />
+      </div>
+      <div className="left">
+        <button
+          className="button is-small is-warning"
+          onClick={() => setText("")}
+        >
+          سند جدید
+        </button>
+        <button
+          className="button is-small is-link"
+          onClick={() => downloadMd(text)}
+        >
+          دریافت فایل MD
+        </button>
+      </div>
     </header>
   );
 };

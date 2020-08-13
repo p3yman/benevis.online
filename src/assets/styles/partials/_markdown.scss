@@ -342,4 +342,9 @@
   .md-lang {
     color: #b4654d;
   }
+
+  pre,
+  code {
+    direction: ltr !important;
+  }
 }

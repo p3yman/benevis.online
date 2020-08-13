@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <div id="app">
-      <Header text={text} />
+      <Header text={text} setText={setText} />
       <Editor text={text} setText={setText} />
       <Footer text={text} />
     </div>

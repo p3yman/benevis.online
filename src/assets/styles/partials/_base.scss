@@ -14,6 +14,10 @@ body {
   overflow: hidden;
 }
 
+.button {
+  font-family: $font;
+}
+
 #app {
   display: flex;
   flex-direction: column;
@@ -23,6 +27,13 @@ body {
     border-bottom: $border;
     background: #fafafa;
     padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .button {
+      margin-right: 5px;
+    }
   }
 
   > footer {
