@@ -1,3 +1,7 @@
+import db from "../firebase";
+import { v4 as uuidv4 } from "uuid";
+import { navigate } from "@reach/router";
+
 /**
  * Download markdown with the passed text as contnet
  * @param {string} text
@@ -16,4 +20,24 @@ export const downloadMd = (text, name = "neveshte") => {
   setTimeout(function () {
     URL.revokeObjectURL(a.href);
   }, 1500);
+};
+
+/**
+ * Create a new post
+ */
+export const newPost = () => {
+  const ref = db.collection("posts");
+  ref
+    .add({
+      title: "بدون عنوان",
+      text: "",
+      updatedAt: new Date(),
+      id: uuidv4(),
+    })
+    .then((docRef) => {
+      navigate(`/e/${docRef.id}`);
+    })
+    .catch((error) => {
+      console.error("Error creating document: ", error);
+    });
 };

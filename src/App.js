@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import "./assets/styles/Style.scss";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import { Router } from "@reach/router";
+
+import Home from "./components/Home";
 import Editor from "./components/Editor";
+import Viewer from "./components/Viewer";
+import Error from "./components/Error";
 
 const App = () => {
-  const [text, setText] = useState("# سلام دنیا");
-
   return (
     <div id="app">
-      <Header text={text} setText={setText} />
-      <Editor text={text} setText={setText} />
-      <Footer text={text} />
+      <Router>
+        <Home path="/" />
+        <Editor path="/e/:id" />
+        <Viewer path="/v/:id" />
+        <Error path="/404" />
+      </Router>
     </div>
   );
 };

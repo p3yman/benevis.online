@@ -23,7 +23,7 @@ body {
   flex-direction: column;
   height: 100vh;
 
-  > header {
+  header {
     border-bottom: $border;
     background: #fafafa;
     padding: 20px;
@@ -36,7 +36,7 @@ body {
     }
   }
 
-  > footer {
+  footer {
     border-top: $border;
     background: #fafafa;
     padding: 20px;
