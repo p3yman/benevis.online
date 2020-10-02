@@ -1,6 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/fa";
+import GithubLogo from "../assets/images/github.svg";
 dayjs.locale("fa");
 
 const Footer = ({ updatedAt }) => {
@@ -13,6 +14,15 @@ const Footer = ({ updatedAt }) => {
 
   return (
     <footer>
+      <div className="github">
+        <a
+          href="https://github.com/p3yman/neveshte"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={GithubLogo} alt="Github Source" width="24" />
+        </a>
+      </div>
       <div className="data">{update}</div>
     </footer>
   );
