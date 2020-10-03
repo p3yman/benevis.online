@@ -36,6 +36,10 @@ body {
       margin-right: 5px;
     }
 
+    .right {
+      display: flex;
+    }
+
     img#logo {
       margin-left: 20px;
     }
@@ -45,6 +49,13 @@ body {
       background: transparent;
       padding: 10px 15px;
       font-family: $font;
+    }
+
+    h3#title {
+      background: transparent;
+      padding: 10px 15px;
+      font-family: $font;
+      font-weight: 500;
     }
   }
 

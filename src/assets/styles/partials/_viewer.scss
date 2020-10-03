@@ -1,0 +1,15 @@
+#viewer {
+  width: 100vw;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+
+  #output {
+    width: 960px;
+    max-width: 100%;
+    background: #ffffff;
+    border: 1px solid #dadce0;
+    padding: 30px;
+  }
+}

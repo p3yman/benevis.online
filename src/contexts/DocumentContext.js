@@ -43,7 +43,7 @@ export const DocumentContextProvider = ({ children }) => {
         });
     };
 
-    if (debounced && debounced.id) {
+    if (debounced && debounced.id && !debounced.readOnly) {
       update();
     }
   }, [debounced]);
