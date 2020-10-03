@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
-import dayjs from "dayjs";
-import "dayjs/locale/fa";
+import moment from "moment-jalaali";
 import GithubLogo from "../assets/images/github.svg";
 import { DocumentContext } from "../contexts/DocumentContext";
 
-dayjs.locale("fa");
+// Config moment
+moment.loadPersian({
+  usePersianDigits: true,
+});
 
 const Footer = () => {
   const { document, isUpdating } = useContext(DocumentContext);
 
   let update = isUpdating
     ? "در حال بروزرسانی..."
-    : `آخرین بروزرسانی: ${dayjs
-        .unix(document.updatedAt.seconds)
-        .format("MMMM D, YYYY h:mm A")}`;
+    : `آخرین بروزرسانی: ${displayDate(document.updatedAt)}`;
 
   return (
     <footer>
@@ -30,4 +30,9 @@ const Footer = () => {
     </footer>
   );
 };
+
+function displayDate(value) {
+  return moment(new Date(value.seconds * 1000)).format("jYYYY/jM/jD HH:mm:ss");
+}
+
 export default Footer;
