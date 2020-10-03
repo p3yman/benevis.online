@@ -15,6 +15,7 @@ const Header = () => {
         <input
           type="text"
           value={document.title}
+          placeholder="عنوان..."
           onChange={(e) => setDocument({ ...document, title: e.target.value })}
         />
       </div>

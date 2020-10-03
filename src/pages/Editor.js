@@ -39,6 +39,7 @@ const Editor = ({ id }) => {
           id="input"
           value={document.text}
           onChange={(e) => setDocument({ ...document, text: e.target.value })}
+          placeholder="متن..."
           rows="10"
         ></textarea>
         <div id="output">
