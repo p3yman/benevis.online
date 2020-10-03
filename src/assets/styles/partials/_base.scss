@@ -35,6 +35,17 @@ body {
     .button {
       margin-right: 5px;
     }
+
+    img#logo {
+      margin-left: 20px;
+    }
+
+    input#title {
+      border: 1px solid #dadce0;
+      background: transparent;
+      padding: 10px 15px;
+      font-family: $font;
+    }
   }
 
   footer {
