@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/fa";
 import GithubLogo from "../assets/images/github.svg";
+import { DocumentContext } from "../contexts/DocumentContext";
+
 dayjs.locale("fa");
 
-const Footer = ({ updatedAt }) => {
+const Footer = () => {
+  const { updatedAt } = useContext(DocumentContext);
+
   let update = "در حال بروزرسانی...";
   if (updatedAt) {
     update = `آخرین بروزرسانی: ${dayjs

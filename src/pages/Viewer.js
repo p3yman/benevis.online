@@ -3,8 +3,8 @@ import Markdown from "react-markdown";
 import db from "../firebase";
 import { navigate } from "@reach/router";
 
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Viewer = ({ id }) => {
   const [text, setText] = useState("# سلام دنیا");

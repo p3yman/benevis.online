@@ -1,27 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { downloadMd } from "../helpers";
 import Logo from "../assets/images/logo.svg";
-import db from "../firebase";
 import { newPost } from "../helpers";
 
-const Header = ({ id, title, setTitle, text, setUpdatedAt }) => {
-  const handleUpdate = () => {
-    setUpdatedAt(null);
-    const updatedAt = new Date();
-    const updateRef = db.collection("posts").doc(id);
-    updateRef
-      .set({
-        title,
-        text,
-        updatedAt,
-      })
-      .then(() => {
-        setUpdatedAt(Math.floor(updatedAt.getTime() / 1000));
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
-  };
+import { DocumentContext } from "../contexts/DocumentContext";
+
+const Header = () => {
+  const { title, setTitle, text } = useContext(DocumentContext);
+
+  function handleTitleChange(value) {
+    if (title !== value) {
+      console.log(title, value);
+      setTitle(value);
+    }
+  }
 
   return (
     <header>
@@ -30,7 +22,7 @@ const Header = ({ id, title, setTitle, text, setUpdatedAt }) => {
         <input
           type="text"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => handleTitleChange(e.target.value)}
         />
       </div>
       <div className="left">
@@ -46,11 +38,9 @@ const Header = ({ id, title, setTitle, text, setUpdatedAt }) => {
         >
           دریافت فایل MD
         </button>
-        <button className="button is-small is-success" onClick={handleUpdate}>
-          ذخیره
-        </button>
       </div>
     </header>
   );
 };
+
 export default Header;
