@@ -6,14 +6,7 @@ import { newPost } from "../helpers";
 import { DocumentContext } from "../contexts/DocumentContext";
 
 const Header = () => {
-  const { title, setTitle, text } = useContext(DocumentContext);
-
-  function handleTitleChange(value) {
-    if (title !== value) {
-      console.log(title, value);
-      setTitle(value);
-    }
-  }
+  const { document, setDocument } = useContext(DocumentContext);
 
   return (
     <header>
@@ -21,8 +14,8 @@ const Header = () => {
         <img src={Logo} alt="Neveshte" width="32" />
         <input
           type="text"
-          value={title}
-          onChange={(e) => handleTitleChange(e.target.value)}
+          value={document.title}
+          onChange={(e) => setDocument({ ...document, title: e.target.value })}
         />
       </div>
       <div className="left">
@@ -34,7 +27,7 @@ const Header = () => {
         </button>
         <button
           className="button is-small is-link"
-          onClick={() => downloadMd(text)}
+          onClick={() => downloadMd(document.text)}
         >
           دریافت فایل MD
         </button>

@@ -10,31 +10,24 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Editor = ({ id }) => {
-  const { setDocument, text, setText, updatedAt } = useContext(DocumentContext);
-  console.log("Here", text);
+  const { document, setDocument } = useContext(DocumentContext);
 
   useEffect(() => {
-    console.log("Rerender");
+    console.log("Fetching");
     const ref = db.collection("posts").doc(id);
     ref.get().then((doc) => {
       if (doc.exists) {
         const data = doc.data();
         const { title, text, updatedAt } = data;
-        // setDocument({ id, title: title || "", text: text || "", updatedAt });
+        console.log(data);
+        setDocument({ id, title: title || "", text: text || "", updatedAt });
       } else {
         navigate("/404");
       }
     });
   }, [id, setDocument]);
 
-  function handleTextChange(value) {
-    if (text !== value) {
-      console.log(text, value);
-      setText(value);
-    }
-  }
-
-  if (!updatedAt) {
+  if (!document.updatedAt) {
     return <Loading />;
   }
 
@@ -44,12 +37,12 @@ const Editor = ({ id }) => {
       <div id="editor">
         <textarea
           id="input"
-          value={text}
-          onChange={(e) => handleTextChange(e.target.value)}
+          value={document.text}
+          onChange={(e) => setDocument({ ...document, text: e.target.value })}
           rows="10"
         ></textarea>
         <div id="output">
-          <Markdown source={text} />
+          <Markdown source={document.text} />
         </div>
       </div>
       <Footer />

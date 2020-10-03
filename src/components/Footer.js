@@ -7,14 +7,13 @@ import { DocumentContext } from "../contexts/DocumentContext";
 dayjs.locale("fa");
 
 const Footer = () => {
-  const { updatedAt } = useContext(DocumentContext);
+  const { document, isUpdating } = useContext(DocumentContext);
 
-  let update = "در حال بروزرسانی...";
-  if (updatedAt) {
-    update = `آخرین بروزرسانی: ${dayjs
-      .unix(updatedAt.seconds)
-      .format("MMMM D, YYYY h:mm A")}`;
-  }
+  let update = isUpdating
+    ? "در حال بروزرسانی..."
+    : `آخرین بروزرسانی: ${dayjs
+        .unix(document.updatedAt.seconds)
+        .format("MMMM D, YYYY h:mm A")}`;
 
   return (
     <footer>

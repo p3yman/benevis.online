@@ -4,52 +4,52 @@ import db from "../firebase";
 export const DocumentContext = createContext();
 
 export const DocumentContextProvider = ({ children }) => {
-  const [id, setId] = useState(null);
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [updatedAt, setUpdatedAt] = useState(null);
-  const debouncedText = useDebounce(text, 1000);
-  const debouncedTitle = useDebounce(title, 1000);
+  const [document, setDocument] = useState({
+    id: null,
+    title: "",
+    text: "",
+    updatedAt: null,
+  });
+  const [debounced, setDebounced] = useState(document);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
-    console.log(debouncedText, debouncedTitle);
-    if (id) {
-      console.log("CHANGED!");
-      setUpdatedAt(null);
-      const updatedAt = new Date();
-      const updateRef = db.collection("posts").doc(id);
+    const timerId = setTimeout(() => {
+      setDebounced(document);
+    }, 2000);
+
+    return () => clearTimeout(timerId);
+  }, [document]);
+
+  useEffect(() => {
+    const update = () => {
+      console.log("Updating!");
+      setIsUpdating(true);
+      const updateRef = db.collection("posts").doc(debounced.id);
+      const { title, text } = debounced;
       updateRef
         .set({
-          debouncedTitle,
-          debouncedText,
-          updatedAt,
+          title,
+          text,
+          updatedAt: new Date(),
         })
         .then(() => {
-          // setUpdatedAt(Math.floor(updatedAt.getTime() / 1000));
+          setIsUpdating(false);
         })
         .catch((error) => {
           console.error("Error adding document: ", error);
         });
-    }
-  }, [debouncedText, debouncedTitle, id]);
+    };
 
-  const setDocument = ({ id, title, text, updatedAt }) => {
-    setId(id);
-    setTitle(title);
-    setText(text);
-    setUpdatedAt(updatedAt);
-  };
+    if (debounced && debounced.id) {
+      update();
+    }
+  }, [debounced]);
 
   const value = {
-    id,
-    setId,
-    title,
-    setTitle,
-    text,
-    setText,
-    updatedAt,
-    setUpdatedAt,
+    document,
     setDocument,
+    isUpdating,
   };
 
   return (
@@ -58,25 +58,3 @@ export const DocumentContextProvider = ({ children }) => {
     </DocumentContext.Provider>
   );
 };
-
-/**
- * Create debounce on a state
- * @param {*} value
- * @param {number} delay
- */
-function useDebounce(value, delay) {
-  // State and setters for debounced value
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-
-  return debouncedValue;
-}
