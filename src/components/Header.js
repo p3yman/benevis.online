@@ -5,19 +5,27 @@ import { newPost } from "../helpers";
 
 import { DocumentContext } from "../contexts/DocumentContext";
 
-const Header = () => {
+const Header = ({ viewer }) => {
   const { document, setDocument } = useContext(DocumentContext);
 
   return (
     <header>
       <div className="right">
-        <img src={Logo} alt="Neveshte" width="32" />
-        <input
-          type="text"
-          value={document.title}
-          placeholder="عنوان..."
-          onChange={(e) => setDocument({ ...document, title: e.target.value })}
-        />
+        <img id="logo" src={Logo} alt="Neveshte" width="24" />
+
+        {viewer ? (
+          <h3 id="title">{document.title}</h3>
+        ) : (
+          <input
+            id="title"
+            type="text"
+            value={document.title}
+            placeholder="عنوان..."
+            onChange={(e) =>
+              setDocument({ ...document, title: e.target.value })
+            }
+          />
+        )}
       </div>
       <div className="left">
         <button
@@ -27,11 +35,21 @@ const Header = () => {
           سند جدید
         </button>
         <button
-          className="button is-small is-link"
+          className="button is-small is-success"
           onClick={() => downloadMd(document.text)}
         >
           دریافت فایل MD
         </button>
+        {!viewer ? (
+          <a
+            className="button is-small is-link"
+            href={`/v/${document.publicId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            لینک عمومی
+          </a>
+        ) : null}
       </div>
     </header>
   );

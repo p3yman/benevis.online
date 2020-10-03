@@ -18,9 +18,15 @@ const Editor = ({ id }) => {
     ref.get().then((doc) => {
       if (doc.exists) {
         const data = doc.data();
-        const { title, text, updatedAt } = data;
+        const { publicId, title, text, updatedAt } = data;
         console.log(data);
-        setDocument({ id, title: title || "", text: text || "", updatedAt });
+        setDocument({
+          id,
+          publicId,
+          title: title || "",
+          text: text || "",
+          updatedAt,
+        });
       } else {
         navigate("/404");
       }

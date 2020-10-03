@@ -32,7 +32,7 @@ export const newPost = () => {
       title: "بدون عنوان",
       text: "",
       updatedAt: new Date(),
-      id: uuidv4(),
+      publicId: uuidv4(),
     })
     .then((docRef) => {
       navigate(`/e/${docRef.id}`);

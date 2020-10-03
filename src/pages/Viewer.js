@@ -1,36 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Markdown from "react-markdown";
 import db from "../firebase";
 import { navigate } from "@reach/router";
 
+import { DocumentContext } from "../contexts/DocumentContext";
+
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Loading from "../components/Loading";
 
 const Viewer = ({ id }) => {
-  const [text, setText] = useState("# سلام دنیا");
+  const { document, setDocument } = useContext(DocumentContext);
 
   useEffect(() => {
-    const ref = db.collection("posts").where("id", "==", id);
+    const ref = db.collection("posts").where("publicId", "==", id);
 
     ref.get().then((results) => {
       if (!results.empty) {
         const data = results.docs[0].data();
-        setText(data.text);
+        const { publicId, title, text, updatedAt } = data;
+        console.log(data);
+        setDocument({
+          id,
+          publicId,
+          title: title || "",
+          text: text || "",
+          updatedAt,
+          readOnly: true,
+        });
       } else {
         navigate("/404");
       }
     });
-  }, [id]);
+  }, [id, setDocument]);
+
+  if (!document) {
+    return <Loading />;
+  }
 
   return (
     <>
-      <Header />
+      <Header viewer={true} />
       <div id="viewer">
         <div id="output">
-          <Markdown source={text} />
+          <Markdown source={document.text} />
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

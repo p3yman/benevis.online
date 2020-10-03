@@ -6,6 +6,7 @@ export const DocumentContext = createContext();
 export const DocumentContextProvider = ({ children }) => {
   const [document, setDocument] = useState({
     id: null,
+    publicId: null,
     title: "",
     text: "",
     updatedAt: null,
@@ -26,11 +27,12 @@ export const DocumentContextProvider = ({ children }) => {
       console.log("Updating!");
       setIsUpdating(true);
       const updateRef = db.collection("posts").doc(debounced.id);
-      const { title, text } = debounced;
+      const { title, text, publicId } = debounced;
       updateRef
         .set({
           title,
           text,
+          publicId,
           updatedAt: new Date(),
         })
         .then(() => {
@@ -41,7 +43,7 @@ export const DocumentContextProvider = ({ children }) => {
         });
     };
 
-    if (debounced && debounced.id) {
+    if (debounced && debounced.id && !debounced.readOnly) {
       update();
     }
   }, [debounced]);
