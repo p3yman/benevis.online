@@ -24,6 +24,7 @@ body {
   height: 100vh;
 
   header {
+    height: 70px;
     border-bottom: $border;
     background: #fafafa;
     padding: 20px;
@@ -37,6 +38,7 @@ body {
   }
 
   footer {
+    height: 50px;
     border-top: $border;
     background: #fafafa;
     padding: 20px;
@@ -44,5 +46,16 @@ body {
     font-weight: 500;
     font-size: 13px;
     color: #bbb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
   }
 }

@@ -2,20 +2,24 @@ import React from "react";
 import "./assets/styles/Style.scss";
 import { Router } from "@reach/router";
 
-import Home from "./components/Home";
-import Editor from "./components/Editor";
-import Viewer from "./components/Viewer";
-import Error from "./components/Error";
+import { DocumentContextProvider } from "./contexts/DocumentContext";
+
+import Home from "./pages/Home";
+import Editor from "./pages/Editor";
+import Viewer from "./pages/Viewer";
+import Error from "./pages/Error";
 
 const App = () => {
   return (
     <div id="app">
-      <Router>
-        <Home path="/" />
-        <Editor path="/e/:id" />
-        <Viewer path="/v/:id" />
-        <Error path="/404" />
-      </Router>
+      <DocumentContextProvider>
+        <Router>
+          <Home path="/" />
+          <Editor path="/e/:id" />
+          <Viewer path="/v/:id" />
+          <Error path="/404" />
+        </Router>
+      </DocumentContextProvider>
     </div>
   );
 };
