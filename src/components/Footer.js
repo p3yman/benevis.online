@@ -19,7 +19,7 @@ const Footer = () => {
     <footer>
       <div className="github">
         <a
-          href="https://github.com/p3yman/neveshte"
+          href="https://github.com/p3yman/benevis.online"
           target="_blank"
           rel="noopener noreferrer"
         >

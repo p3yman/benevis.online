@@ -13,7 +13,6 @@ const Editor = ({ id }) => {
   const { document, setDocument } = useContext(DocumentContext);
 
   useEffect(() => {
-    console.log("Fetching");
     const ref = db.collection("posts").doc(id);
     ref.get().then((doc) => {
       if (doc.exists) {

@@ -24,7 +24,6 @@ export const DocumentContextProvider = ({ children }) => {
 
   useEffect(() => {
     const update = () => {
-      console.log("Updating!");
       setIsUpdating(true);
       const updateRef = db.collection("posts").doc(debounced.id);
       const { title, text, publicId } = debounced;
