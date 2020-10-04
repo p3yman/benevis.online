@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
+import { Link } from "@reach/router";
 import { downloadMd } from "../helpers";
 import Logo from "../assets/images/logo.svg";
-import { newPost } from "../helpers";
 
 import { DocumentContext } from "../contexts/DocumentContext";
 
@@ -28,12 +28,9 @@ const Header = ({ viewer }) => {
         )}
       </div>
       <div className="left">
-        <button
-          className="button is-small is-warning"
-          onClick={() => newPost()}
-        >
+        <Link className="button is-small is-warning" to="/">
           سند جدید
-        </button>
+        </Link>
         <button
           className="button is-small is-success"
           onClick={() => downloadMd(document.text)}
