@@ -14,10 +14,12 @@
 
 #output {
   border-right: $border;
+  line-height: 2;
 }
 
 textarea#input {
   border: 0;
   font-family: $font;
   resize: none;
+  line-height: 2;
 }

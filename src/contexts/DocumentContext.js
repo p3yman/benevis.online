@@ -4,23 +4,23 @@ import db from "../firebase";
 export const DocumentContext = createContext();
 
 export const DocumentContextProvider = ({ children }) => {
-  const [document, setDocument] = useState({
+  const [doc, setDoc] = useState({
     id: null,
     publicId: null,
     title: "",
     text: "",
     updatedAt: null,
   });
-  const [debounced, setDebounced] = useState(document);
+  const [debounced, setDebounced] = useState(doc);
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      setDebounced(document);
+      setDebounced(doc);
     }, 2000);
 
     return () => clearTimeout(timerId);
-  }, [document]);
+  }, [doc]);
 
   useEffect(() => {
     const update = () => {
@@ -48,8 +48,8 @@ export const DocumentContextProvider = ({ children }) => {
   }, [debounced]);
 
   const value = {
-    document,
-    setDocument,
+    doc,
+    setDoc,
     isUpdating,
   };
 

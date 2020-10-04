@@ -9,11 +9,11 @@ moment.loadPersian({
 });
 
 const Footer = () => {
-  const { document, isUpdating } = useContext(DocumentContext);
+  const { doc, isUpdating } = useContext(DocumentContext);
 
   let update = isUpdating
     ? "در حال بروزرسانی..."
-    : `آخرین بروزرسانی: ${displayDate(document.updatedAt)}`;
+    : `آخرین بروزرسانی: ${displayDate(doc.updatedAt)}`;
 
   return (
     <footer>

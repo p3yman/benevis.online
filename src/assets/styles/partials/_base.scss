@@ -12,6 +12,14 @@ body {
   direction: rtl;
   font-family: $font;
   overflow: hidden;
+
+  &.viewer-page {
+    overflow: auto;
+
+    #app {
+      height: auto !important;
+    }
+  }
 }
 
 .button {

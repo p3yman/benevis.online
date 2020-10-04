@@ -21,7 +21,6 @@
   h4:hover a.anchor,
   h5:hover a.anchor,
   h6:hover a.anchor {
-    /*background: url("../../images/modules/styleguide/para.png") no-repeat 10px center;*/
     text-decoration: none;
   }
   h1 tt,
@@ -97,6 +96,13 @@
     border-bottom: 1px solid #ddd;
   }
 
+  strong {
+    font-weight: bold;
+  }
+  em {
+    font-style: italic;
+  }
+
   body > h2:first-child {
     margin-top: 0;
     padding-top: 0;
@@ -138,7 +144,13 @@
   }
   ul,
   ol {
-    padding-left: 30px;
+    padding-right: 30px;
+  }
+  ul {
+    list-style: disc;
+  }
+  ol {
+    list-style: decimal;
   }
   ul:first-child,
   ol:first-child {
@@ -149,12 +161,12 @@
     margin-bottom: 0;
   }
   blockquote {
-    border-left: 4px solid #dddddd;
+    border-right: 4px solid #dddddd;
     padding: 0 15px;
     color: #777777;
   }
   blockquote blockquote {
-    padding-right: 0;
+    padding-left: 0;
   }
   table {
     padding: 0;
@@ -226,12 +238,6 @@
     left: 8px;
   }
 
-  @media screen and (min-width: 914px) {
-    /*body {
-        width: 854px;
-        margin: 0 auto;
-    }*/
-  }
   @media print {
     html {
       font-size: 13px;
@@ -319,7 +325,7 @@
 
   /** focus mode */
   .on-focus-mode blockquote {
-    border-left-color: rgba(85, 85, 85, 0.12);
+    border-right-color: rgba(85, 85, 85, 0.12);
   }
 
   header,
@@ -346,5 +352,11 @@
   pre,
   code {
     direction: ltr !important;
+    unicode-bidi: embed;
   }
+}
+
+input[type="checkbox"][readonly] {
+  margin-left: 7px;
+  vertical-align: middle;
 }

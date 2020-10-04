@@ -9,7 +9,15 @@ import Header from "../components/Header";
 import Loading from "../components/Loading";
 
 const Viewer = ({ id }) => {
-  const { document, setDocument } = useContext(DocumentContext);
+  const { doc, setDoc } = useContext(DocumentContext);
+
+  useEffect(() => {
+    document.body.classList.add("viewer-page");
+
+    return () => {
+      document.body.classList.remove("viewer-page");
+    };
+  }, []);
 
   useEffect(() => {
     const ref = db.collection("posts").where("publicId", "==", id);
@@ -18,8 +26,7 @@ const Viewer = ({ id }) => {
       if (!results.empty) {
         const data = results.docs[0].data();
         const { publicId, title, text, updatedAt } = data;
-        console.log(data);
-        setDocument({
+        setDoc({
           id,
           publicId,
           title: title || "",
@@ -31,9 +38,9 @@ const Viewer = ({ id }) => {
         navigate("/404");
       }
     });
-  }, [id, setDocument]);
+  }, [id, setDoc]);
 
-  if (!document) {
+  if (!doc) {
     return <Loading />;
   }
 
@@ -42,7 +49,7 @@ const Viewer = ({ id }) => {
       <Header viewer={true} />
       <div id="viewer">
         <div id="output">
-          <Markdown source={document.text} />
+          <Markdown source={doc.text} />
         </div>
       </div>
       {/* <Footer /> */}
