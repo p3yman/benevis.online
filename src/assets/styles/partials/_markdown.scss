@@ -97,6 +97,13 @@
     border-bottom: 1px solid #ddd;
   }
 
+  strong {
+    font-weight: bold;
+  }
+  em {
+    font-style: italic;
+  }
+
   body > h2:first-child {
     margin-top: 0;
     padding-top: 0;
