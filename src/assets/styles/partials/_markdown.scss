@@ -21,7 +21,6 @@
   h4:hover a.anchor,
   h5:hover a.anchor,
   h6:hover a.anchor {
-    /*background: url("../../images/modules/styleguide/para.png") no-repeat 10px center;*/
     text-decoration: none;
   }
   h1 tt,
@@ -145,7 +144,13 @@
   }
   ul,
   ol {
-    padding-left: 30px;
+    padding-right: 30px;
+  }
+  ul {
+    list-style: disc;
+  }
+  ol {
+    list-style: decimal;
   }
   ul:first-child,
   ol:first-child {
@@ -233,12 +238,6 @@
     left: 8px;
   }
 
-  @media screen and (min-width: 914px) {
-    /*body {
-        width: 854px;
-        margin: 0 auto;
-    }*/
-  }
   @media print {
     html {
       font-size: 13px;
@@ -353,5 +352,11 @@
   pre,
   code {
     direction: ltr !important;
+    unicode-bidi: embed;
   }
+}
+
+input[type="checkbox"][readonly] {
+  margin-left: 7px;
+  vertical-align: middle;
 }
