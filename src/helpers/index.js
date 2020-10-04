@@ -1,16 +1,20 @@
 import db from "../firebase";
 import { v4 as uuidv4 } from "uuid";
+import moment from "moment-jalaali";
 import { navigate } from "@reach/router";
 
 /**
  * Download markdown with the passed text as contnet
  * @param {string} text
  */
-export const downloadMd = (text, name = "neveshte") => {
+export const downloadMd = (text, name) => {
   const blob = new Blob([text], { type: "text/plain" });
 
+  const fileName =
+    name || `benevis-online-${moment().format("YYYY-MM-DD--HH-mm-ss")}`;
+
   const a = document.createElement("a");
-  a.download = `${name}.md`;
+  a.download = `${fileName}.md`;
   a.href = URL.createObjectURL(blob);
   a.dataset.downloadurl = ["text/plain", a.download, a.href].join(":");
   a.style.display = "none";
@@ -40,4 +44,16 @@ export const newPost = () => {
     .catch((error) => {
       console.error("Error creating document: ", error);
     });
+};
+
+/**
+ * Converts English digits into farsi numbers
+ *
+ * @param digit
+ * @param locale {string}
+ * @returns {string}
+ */
+export const digits = (digit, locale = "en") => {
+  const fa = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  return `${digit}`.replace(/\d/g, (w) => fa[w]);
 };

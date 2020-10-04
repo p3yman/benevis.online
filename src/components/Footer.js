@@ -2,11 +2,7 @@ import React, { useContext } from "react";
 import moment from "moment-jalaali";
 import GithubLogo from "../assets/images/github.svg";
 import { DocumentContext } from "../contexts/DocumentContext";
-
-// Config moment
-moment.loadPersian({
-  usePersianDigits: true,
-});
+import { digits } from "../helpers";
 
 const Footer = () => {
   const { doc, isUpdating } = useContext(DocumentContext);
@@ -32,7 +28,9 @@ const Footer = () => {
 };
 
 function displayDate(value) {
-  return moment(new Date(value.seconds * 1000)).format("jYYYY/jM/jD HH:mm:ss");
+  return digits(
+    moment(new Date(value.seconds * 1000)).format("jYYYY/jM/jD HH:mm:ss")
+  );
 }
 
 export default Footer;
