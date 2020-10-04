@@ -10,16 +10,15 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Editor = ({ id }) => {
-  const { document, setDocument } = useContext(DocumentContext);
+  const { doc, setDoc } = useContext(DocumentContext);
 
   useEffect(() => {
     const ref = db.collection("posts").doc(id);
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        const data = doc.data();
+    ref.get().then((firebaseDoc) => {
+      if (firebaseDoc.exists) {
+        const data = firebaseDoc.data();
         const { publicId, title, text, updatedAt } = data;
-        console.log(data);
-        setDocument({
+        setDoc({
           id,
           publicId,
           title: title || "",
@@ -30,9 +29,9 @@ const Editor = ({ id }) => {
         navigate("/404");
       }
     });
-  }, [id, setDocument]);
+  }, [id, setDoc]);
 
-  if (!document.updatedAt) {
+  if (!doc.updatedAt) {
     return <Loading />;
   }
 
@@ -42,13 +41,13 @@ const Editor = ({ id }) => {
       <div id="editor">
         <textarea
           id="input"
-          value={document.text}
-          onChange={(e) => setDocument({ ...document, text: e.target.value })}
+          value={doc.text}
+          onChange={(e) => setDoc({ ...doc, text: e.target.value })}
           placeholder="متن..."
           rows="10"
         ></textarea>
         <div id="output">
-          <Markdown source={document.text} />
+          <Markdown source={doc.text} />
         </div>
       </div>
       <Footer />

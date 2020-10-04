@@ -6,7 +6,7 @@ import Logo from "../assets/images/logo.svg";
 import { DocumentContext } from "../contexts/DocumentContext";
 
 const Header = ({ viewer }) => {
-  const { document, setDocument } = useContext(DocumentContext);
+  const { doc, setDoc } = useContext(DocumentContext);
 
   return (
     <header>
@@ -14,16 +14,14 @@ const Header = ({ viewer }) => {
         <img id="logo" src={Logo} alt="Neveshte" width="24" />
 
         {viewer ? (
-          <h3 id="title">{document.title}</h3>
+          <h3 id="title">{doc.title}</h3>
         ) : (
           <input
             id="title"
             type="text"
-            value={document.title}
+            value={doc.title}
             placeholder="عنوان..."
-            onChange={(e) =>
-              setDocument({ ...document, title: e.target.value })
-            }
+            onChange={(e) => setDoc({ ...doc, title: e.target.value })}
           />
         )}
       </div>
@@ -33,14 +31,14 @@ const Header = ({ viewer }) => {
         </Link>
         <button
           className="button is-small is-success"
-          onClick={() => downloadMd(document.text)}
+          onClick={() => downloadMd(doc.text)}
         >
           دریافت فایل MD
         </button>
         {!viewer ? (
           <a
             className="button is-small is-link"
-            href={`/v/${document.publicId}`}
+            href={`/v/${doc.publicId}`}
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -161,12 +161,12 @@
     margin-bottom: 0;
   }
   blockquote {
-    border-left: 4px solid #dddddd;
+    border-right: 4px solid #dddddd;
     padding: 0 15px;
     color: #777777;
   }
   blockquote blockquote {
-    padding-right: 0;
+    padding-left: 0;
   }
   table {
     padding: 0;
@@ -325,7 +325,7 @@
 
   /** focus mode */
   .on-focus-mode blockquote {
-    border-left-color: rgba(85, 85, 85, 0.12);
+    border-right-color: rgba(85, 85, 85, 0.12);
   }
 
   header,
