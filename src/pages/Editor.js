@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import Markdown from "react-markdown";
-import db from "../firebase";
 import { navigate } from "@reach/router";
 
 import { DocumentContext } from "../contexts/DocumentContext";
@@ -13,22 +12,14 @@ const Editor = ({ id }) => {
   const { doc, setDoc } = useContext(DocumentContext);
 
   useEffect(() => {
-    const ref = db.collection("posts").doc(id);
-    ref.get().then((firebaseDoc) => {
-      if (firebaseDoc.exists) {
-        const data = firebaseDoc.data();
-        const { publicId, title, text, updatedAt } = data;
-        setDoc({
-          id,
-          publicId,
-          title: title || "",
-          text: text || "",
-          updatedAt,
-        });
-      } else {
+    fetch(`/api/edit/${id}`)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r)))
+      .then((results) => {
+        setDoc(results);
+      })
+      .catch(() => {
         navigate("/404");
-      }
-    });
+      });
   }, [id, setDoc]);
 
   if (!doc.updatedAt) {
