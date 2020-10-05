@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from "react";
-import db from "../firebase";
 
 export const DocumentContext = createContext();
 
@@ -25,20 +24,15 @@ export const DocumentContextProvider = ({ children }) => {
   useEffect(() => {
     const update = () => {
       setIsUpdating(true);
-      const updateRef = db.collection("posts").doc(debounced.id);
-      const { title, text, publicId } = debounced;
-      updateRef
-        .set({
-          title,
-          text,
-          publicId,
-          updatedAt: new Date(),
-        })
-        .then(() => {
+      fetch(
+        `/api/update/${debounced.id}?title=${debounced.title}&text=${debounced.text}&publicId=${debounced.publicId}`
+      )
+        .then((r) => (r.ok ? r.json() : Promise.reject(r)))
+        .then((results) => {
           setIsUpdating(false);
         })
-        .catch((error) => {
-          console.error("Error adding document: ", error);
+        .catch(() => {
+          console.error("Error updating document.");
         });
     };
 

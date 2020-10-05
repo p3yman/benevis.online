@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import Markdown from "react-markdown";
-import db from "../firebase";
 import { navigate } from "@reach/router";
 
 import { DocumentContext } from "../contexts/DocumentContext";
@@ -20,27 +19,17 @@ const Viewer = ({ id }) => {
   }, []);
 
   useEffect(() => {
-    const ref = db.collection("posts").where("publicId", "==", id);
-
-    ref.get().then((results) => {
-      if (!results.empty) {
-        const data = results.docs[0].data();
-        const { publicId, title, text, updatedAt } = data;
-        setDoc({
-          id,
-          publicId,
-          title: title || "",
-          text: text || "",
-          updatedAt,
-          readOnly: true,
-        });
-      } else {
+    fetch(`/api/show/${id}`)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r)))
+      .then((results) => {
+        setDoc(results);
+      })
+      .catch(() => {
         navigate("/404");
-      }
-    });
+      });
   }, [id, setDoc]);
 
-  if (!doc) {
+  if (!doc.id) {
     return <Loading />;
   }
 
