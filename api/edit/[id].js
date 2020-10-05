@@ -3,7 +3,7 @@
  *********************************/
 import db from "../../src/firebase";
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const { id } = req.query;
 
   const ref = await db.collection("posts").doc(id);

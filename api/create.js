@@ -4,7 +4,7 @@
 import db from "../src/firebase";
 import { v4 as uuidv4 } from "uuid";
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const ref = await db.collection("posts");
   ref
     .add({
