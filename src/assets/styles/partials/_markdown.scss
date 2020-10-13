@@ -207,7 +207,6 @@
   }
 
   .md-fences,
-  code,
   tt {
     border: 1px solid #ddd;
     background-color: #f8f8f8;
@@ -216,6 +215,27 @@
     font-family: Consolas, "Liberation Mono", Courier, monospace;
     padding: 2px 4px 0px 4px;
     font-size: 0.9em;
+  }
+
+  code {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+  }
+
+  pre {
+    padding: 10px;
+
+    code {
+      border: 0;
+      background-color: transparent;
+      border-radius: 0;
+      padding: 0;
+    }
   }
 
   .md-fences {
